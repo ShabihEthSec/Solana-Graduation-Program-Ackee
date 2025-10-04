@@ -1,93 +1,141 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/idxPpgnz)
-![School of Solana](https://github.com/Ackee-Blockchain/school-of-solana/blob/master/.banner/banner.png?raw=true)
+# Project Description
 
-## 📚Solana Program
-We are about halfway through the course, and you already have some experience with programming on Solana. It is time to create something on your own! You will be building a dApp that will serve as the culmination of everything you have learned so far. Feel free to implement whatever comes to your mind, (as long as it passes the requirements).
+**Deployed Frontend URL:** [https://sol-buy-me-a-coffee.vercel.app/](https://sol-buy-me-a-coffee.vercel.app/)  
 
-**This does not mean that the School of Solana is coming to an end just yet!** There are still several exciting lectures ahead, as well as one security related task.
+**Solana Program ID:** 8TenFn5NbJriUWrdRi89S742UZWqrtpNJvAYKFE2M2A5
 
-### Task details
-This task consists of two parts:
-1. **Core of your dApp**
-    - A deployed Solana program.
-2. **Frontend**
-    - A simple frontend to interact with the dApp.
+---
 
-### Requirements
-- An Anchor program deployed on **Devnet** or **Mainnet**.
-- The Anchor program must use a PDA (Program Derived Address).
-- At least one TypeScript **test** for each Anchor program instruction. These tests should cover both **happy** and **unhappy** (intentional error-triggering) scenarios.
-- A simple **frontend** deployed using your preferred provider (for more info, check below).
-- A filled out **PROJECT_DESCRIPTION.md** file.
+## Project Overview
 
-### Ideas
-We highly recommend starting with something simple. Take time to think through your project and work on it in iterations. Do not try to implement everything at once!
+### Description
+**Buy Me A Coffee** is a Solana-based decentralized application (dApp) that allows creators to receive small donations (SOL) from supporters, similar to “buying a coffee” as a gesture of appreciation.  
 
-Below is a list of few ideas to get you started:
-- **Social app**
-    - Instagram
-    - Giphy
-    - Friendtech
-    - Spotify
-- **Blog**
-- **Voting** ([D21 - Janeček method](https://www.ih21.org/en/guidelines))
-- **DeFi**
-    - Crowdfunding
-    - Raffles
-    - Escrow
-    - Tipping
-    - Lending ([Save Documentation](https://docs.save.finance/))
-    - Liquid Staking ([Marinade Documentation](https://docs.marinade.finance/))
-    - Data Query with Pyth ([Pyth Documentation](https://docs.pyth.network/price-feeds))
-    - AMM ([Raydium Documentation](https://raydium.gitbook.io/raydium/))
-- **Gaming**
-    - Browser Game ([Gaming on Solana](https://solanacookbook.com/gaming/nfts-in-games.html#nfts-in-games))
+The dApp enables users to:
+- Initialize a coffee account associated with their wallet.
+- Accept SOL donations from multiple supporters.
+- Track donation history and total contributions.
+- Allow only the owner to withdraw accumulated funds.  
 
-### Deadline
-The deadline for this task is **Wednesday, August 27th, at 23:59 UTC**.
->[!CAUTION]
->Note that we will not accept submissions after the deadline.
+The frontend is built in **React + TypeScript** with **Anchor** integration for Solana program interactions and supports wallet connections using **Phantom**.
 
-### Submission
-There are two folders, one for the Anchor project, and one for the frontend. Push your changes to the **main** branch of **this** repository.
+---
 
->[!IMPORTANT]
->It is essential that you fill out the `PROJECT_DESCRIPTION.md` template completely and accurately. This document will be used by AI for the initial evaluation, so provide detailed information about your project, including working links, clear descriptions, and technical implementation details.
+### Key Features
+- **Wallet Connection:** Connect your Solana wallet using Phantom.
+- **Initialize Coffee Account:** Create a coffee account to start receiving donations.
+- **Send Coffee:** Donate SOL to a creator with an optional message.
+- **Withdraw Funds:** The account owner can withdraw accumulated SOL.
+- **View Balance:** Check total donations and donation count in real-time.
+- **Responsive UI:** Works across desktop and mobile devices.
+- **Live Demo:** Users can interact with the program deployed on **Devnet**.
 
-### Evaluation
-The evaluation process is based on the **requirements**. If you meet the requirements, you pass the task!
+---
 
->[!NOTE]
->We have a record number of participants this season, so the first round of evaluations will be conducted by AI to verify requirements before manual review. AI can make mistakes. If you believe you fulfilled all requirements but weren't graded correctly, please create a support ticket and we will resolve the issue.
+### How to Use the dApp
 
->[!CAUTION]
->We expect original work that demonstrates your understanding and creativity. While you may draw inspiration from examples covered in lessons and tasks, **direct copying is not acceptable**. If you choose to build upon an example from the School of Solana materials, you must significantly expand it with additional features, instructions, and functionality to showcase your learning progress. 
+1. **Connect Wallet:** Click “Connect Wallet” and approve connection via Phantom.
+2. **Initialize Coffee Account:** Click “Initialize” to create your coffee account (only required once per wallet).
+3. **Send Coffee:** Enter the donation amount and a message, then click “Send Coffee”.
+4. **View Balance:** See total donations and the number of supporters.
+5. **Withdraw Funds:** If you are the owner, click “Withdraw” to collect all accumulated SOL.
 
-### Example Workflow
-Let's say you are going to implement the Twitter dApp as the Solana Program. Here's how the steps could look:
+---
 
-**1.** Implement Twitter dApp using the Anchor framework.
+## Program Architecture
 
-**2.** Test the Twitter dApp using the Anchor framework.
+The Solana program is written using **Anchor** and includes the following main instructions:
 
-**3.** Deploy the Twitter dApp on the Solana Devnet.
+1. **initialize** – Initializes the coffee account and sets the owner.
+2. **send_coffee** – Records a donation from a supporter, updates the total donations, and stores donation metadata.
+3. **get_balance** – Returns the total SOL stored in the coffee account.
+4. **withdraw** – Allows the owner to withdraw all accumulated funds.
 
-**4.** Using the create solana dapp template, implement frontend for the Twitter dApp.
+### PDA Usage
+The project uses **Program Derived Addresses (PDAs)** to deterministically derive account addresses:
 
-**5.** Publish Frontend using [Vercel](https://vercel.com).
+**PDAs Used:**
+- **CoffeeAccount PDA:** Seed: `"coffee"` – Stores the coffee account associated with the owner, tracking total donations and donation count.
+- **Donation PDA:** Each donation is recorded in its own account (PDA) to track donor, amount, message, and timestamp.
 
-**6.** Fill out the PROJECT_DESCRIPTION.md template.
+PDAs ensure that accounts are deterministic and securely associated with the program and wallet addresses.
 
-**7.** Submit the Twitter dApp using GitHub Classroom.
+---
 
-### Useful Links
-- [Vercel](https://vercel.com)
-- [Create Solana Dapp](https://github.com/solana-foundation/create-solana-dapp)
-- [Account Macro Constraints](https://docs.rs/anchor-lang/latest/anchor_lang/derive.Accounts.html#constraints)
-- [Solana Developers Courses](https://solana.com/developers/courses)
+### Program Instructions
 
------
+**Instructions Implemented:**
 
-### Need help?
->[!TIP]
->If you have any questions, feel free to reach out to us on [Discord](https://discord.gg/z3JVuZyFnp).
+- **initialize(owner: Pubkey):** Creates a new coffee account PDA and assigns ownership. Only callable once per wallet.  
+- **send_coffee(amount: u64, message: String):** Creates a donation account and updates the coffee account’s total donations and count.  
+- **get_balance(): u64** – Returns the current total balance in the coffee account.  
+- **withdraw():** Transfers all accumulated SOL from the coffee account to the owner. Fails if caller is not the owner.
+
+---
+
+### Account Structure
+
+```rust
+#[account]
+pub struct CoffeeAccount {
+    pub owner: Pubkey,          // Wallet of the creator
+    pub total_donations: u64,   // Total SOL received
+    pub donation_count: u64,    // Number of donations received
+}
+
+#[account]
+pub struct Donation {
+    pub from: Pubkey,           // Donor wallet address
+    pub amount: u64,            // Amount of SOL donated
+    pub message: String,        // Optional message from donor
+    pub timestamp: i64,         // Donation time
+}
+````
+
+---
+
+## Testing
+
+### Test Coverage
+
+Testing is implemented using **Anchor**, **Mocha**, and **Chai**. It covers:
+
+**Happy Path Tests:**
+
+* Initialize coffee account successfully.
+* Send coffee (donation) from a single donor.
+* Send multiple donations from different donors.
+* Retrieve balance correctly.
+* Owner withdraws accumulated funds successfully.
+
+**Unhappy Path Tests:**
+
+* Initialization fails if coffee account already exists.
+* Donations fail with zero amount.
+* Donations fail if donor has insufficient balance.
+* Retrieving balance for a non-existent account fails.
+* Non-owner withdraw attempts fail with `Unauthorized`.
+* Withdrawal succeeds when only rent-exempt balance exists.
+* Withdrawal fails if an invalid owner signer tries to withdraw.
+
+---
+
+### Running Tests
+
+```bash
+anchor test
+```
+
+This runs all unit tests locally using the Solana test validator.
+
+---
+
+### Additional Notes for Evaluators
+
+* Tests simulate multiple wallets using `Keypair.generate()`.
+* Airdrops ensure all accounts have enough SOL for testing.
+* PDAs are used to deterministically generate coffee account and donation accounts.
+* Donation records store donor, amount, message, and timestamp.
+* Frontend interacts with these PDAs via the Anchor-generated IDL and Solana wallet adapter.
+* Both success and failure scenarios are fully tested.
+
